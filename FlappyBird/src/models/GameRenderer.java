@@ -1,5 +1,7 @@
 package models;
 
+import utils.ResourceManager;
+
 import java.awt.*;
 import java.util.ArrayList;
 
