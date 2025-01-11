@@ -1,6 +1,7 @@
 package models;
 
 import interfaces.IBird;
+import interfaces.IGameState;
 import interfaces.IPipe;
 import utils.ImagesManager;
 import utils.ScoreManager;
@@ -9,7 +10,7 @@ import utils.SoundsManager;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GameState {
+public class GameState implements IGameState {
     private final IBird bird;
     private final ArrayList<IPipe> pipes;
     private final Random random;

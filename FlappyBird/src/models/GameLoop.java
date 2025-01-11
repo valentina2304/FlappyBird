@@ -1,9 +1,11 @@
 package models;
 
+import interfaces.IGameLoop;
+
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class GameLoop {
+public class GameLoop implements IGameLoop {
     private final Timer gameTimer;
     private final Timer pipeTimer;
     private long lastUpdateTime;

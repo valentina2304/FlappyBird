@@ -1,5 +1,6 @@
 package models;
 
+import interfaces.IGameMenu;
 import utils.ScoreManager;
 import utils.ImagesManager;
 
@@ -7,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 
-public class GameMenu {
+public class GameMenu implements IGameMenu {
     private final String[] options = {"Continue", "Statistics", "Replay", "Quit"};
     private int selectedOption = 0;
     private boolean isVisible = false;

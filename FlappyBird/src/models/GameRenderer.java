@@ -1,6 +1,7 @@
 package models;
 
 import interfaces.IBird;
+import interfaces.IGameRenderer;
 import interfaces.IPipe;
 import utils.ImagesManager;
 import utils.ScoreManager;
@@ -8,7 +9,7 @@ import utils.ScoreManager;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GameRenderer {
+public class GameRenderer implements IGameRenderer {
     private final ImagesManager resources;
 
     public GameRenderer(ImagesManager resources) {
@@ -17,17 +18,13 @@ public class GameRenderer {
 
     public void render(Graphics g, IBird bird, ArrayList<IPipe> pipes, ScoreManager scoreManager, boolean gameOver) {
         drawBackground(g);
-        drawBird(g, bird);
+        bird.draw(g);
         drawPipes(g, pipes);
         drawScore(g, scoreManager, gameOver);
     }
 
     private void drawBackground(Graphics g) {
         g.drawImage(resources.getBackgroundImg(), 0, 0, GameConfig.BOARD_WIDTH, GameConfig.BOARD_HEIGHT, null);
-    }
-
-    private void drawBird(Graphics g, IBird bird) {
-        g.drawImage(resources.getBirdImg(), bird.getX(), bird.getY(), bird.getWidth(), bird.getHeight(), null);
     }
 
     private void drawPipes(Graphics g, ArrayList<IPipe> pipes) {

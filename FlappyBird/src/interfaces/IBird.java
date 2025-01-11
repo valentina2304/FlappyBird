@@ -6,7 +6,7 @@ public interface IBird {
     public void updatePosition(double deltaTime);
     public void jump();
     public void reset(int startY);
-
+    public void draw(Graphics g);
     public Rectangle getBounds();
     public int getX();
     public int getY();

@@ -1,5 +1,6 @@
 package models;
 
+import interfaces.*;
 import utils.ImagesManager;
 
 import javax.swing.*;
@@ -7,11 +8,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class FlappyBird extends JPanel implements KeyListener {
-    private final GameState gameState;
+    private final IGameState gameState;
     private final ImagesManager resources;
-    private final GameRenderer renderer;
-    private final GameLoop gameLoop;
-    private final GameMenu gameMenu;
+    private final IGameRenderer renderer;
+    private final IGameLoop gameLoop;
+    private final IGameMenu gameMenu;
 
     public FlappyBird() {
         setPreferredSize(new Dimension(GameConfig.BOARD_WIDTH, GameConfig.BOARD_HEIGHT));
@@ -25,8 +26,8 @@ public class FlappyBird extends JPanel implements KeyListener {
 
         gameLoop = new GameLoop(
                 e -> {
-                    if (e instanceof GameUpdateEvent) {
-                        double deltaTime = ((GameUpdateEvent) e).getDeltaTime();
+                    if (e instanceof IGameUpdateEvent) {
+                        double deltaTime = ((IGameUpdateEvent) e).getDeltaTime();
                         gameState.update(deltaTime);
                         repaint();
                     }
