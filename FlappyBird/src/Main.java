@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import models.FlappyBird;
 
 class App {

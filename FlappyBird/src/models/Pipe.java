@@ -1,9 +1,12 @@
 package models;
 
+import interfaces.IBird;
+import interfaces.IPipe;
+
 import java.awt.*;
 
-class Pipe {
-    private double exactX; // Poziția exactă cu virgulă mobilă
+class Pipe implements IPipe {
+    private double exactX;
     private int x, y;
     private final int width;
     private final int height;
@@ -28,7 +31,7 @@ class Pipe {
         g.drawImage(img, x, y, width, height, null);
     }
 
-    public boolean intersects(Bird bird) {
+    public boolean intersects(IBird bird) {
         return bird.getBounds().intersects(getBounds());
     }
 

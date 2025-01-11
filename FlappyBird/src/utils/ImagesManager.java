@@ -3,13 +3,13 @@ package utils;
 import javax.swing.*;
 import java.awt.*;
 
-public class ResourceManager {
+public class ImagesManager {
     private final Image backgroundImg;
     private final Image birdImg;
     private final Image topPipeImg;
     private final Image bottomPipeImg;
 
-    public ResourceManager() {
+    public ImagesManager() {
         backgroundImg = loadImage("/resources/flappybirdbg.png");
         birdImg = loadImage("/resources/flappybird.png");
         topPipeImg = loadImage("/resources/toppipe.png");

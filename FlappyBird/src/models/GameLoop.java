@@ -17,11 +17,7 @@ public class GameLoop {
                 long currentTime = System.nanoTime();
                 double deltaTime = (currentTime - lastUpdateTime) / 1_000_000_000.0;
                 lastUpdateTime = currentTime;
-
-                // Limităm deltaTime pentru a preveni sărituri mari
                 deltaTime = Math.min(deltaTime, 0.1);
-
-                // Convertim ActionEvent în unul care conține deltaTime
                 updateAction.actionPerformed(new GameUpdateEvent(e.getSource(), e.getID(), deltaTime));
             }
         });

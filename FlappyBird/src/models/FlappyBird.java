@@ -1,6 +1,6 @@
 package models;
 
-import utils.ResourceManager;
+import utils.ImagesManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 public class FlappyBird extends JPanel implements KeyListener {
     private final GameState gameState;
-    private final ResourceManager resources;
+    private final ImagesManager resources;
     private final GameRenderer renderer;
     private final GameLoop gameLoop;
     private final GameMenu gameMenu;
@@ -18,7 +18,7 @@ public class FlappyBird extends JPanel implements KeyListener {
         setFocusable(true);
         addKeyListener(this);
 
-        resources = new ResourceManager();
+        resources = new ImagesManager();
         gameState = new GameState(resources);
         renderer = new GameRenderer(resources);
         gameMenu = new GameMenu();
@@ -37,7 +37,7 @@ public class FlappyBird extends JPanel implements KeyListener {
         startGame();
     }
 
-    private void startGame() {
+    public void startGame() {
         gameState.reset();
         gameLoop.start();
     }
@@ -48,7 +48,6 @@ public class FlappyBird extends JPanel implements KeyListener {
         renderer.render(g, gameState.getBird(), gameState.getPipes(),
                 gameState.getScoreManager(), gameState.isGameOver());
 
-        // Draw "Press SPACE to start" message if game hasn't started
         if (!gameState.isGameStarted() && !gameState.isGameOver()) {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setFont(new Font("Arial", Font.BOLD, 24));
@@ -62,7 +61,7 @@ public class FlappyBird extends JPanel implements KeyListener {
         }
 
         if (gameMenu.isVisible()) {
-            gameMenu.draw(g);
+            gameMenu.draw(g, gameState.getScoreManager());
         }
     }
 
@@ -77,15 +76,15 @@ public class FlappyBird extends JPanel implements KeyListener {
                         startGame();
                     } else if (!gameState.isGameStarted()) {
                         gameState.startGame();
-                        utils.Sounds.playSound("/resources/wing.wav");
+                        utils.SoundsManager.playSound("/resources/wing.wav");
                         gameState.getBird().jump();
                     } else {
-                        utils.Sounds.playSound("/resources/wing.wav");
+                        utils.SoundsManager.playSound("/resources/wing.wav");
                         gameState.getBird().jump();
                     }
                     break;
                 case KeyEvent.VK_ESCAPE:
-                    if (gameState.isGameStarted()) {  // Only allow menu when game has started
+                    if (gameState.isGameStarted()) {
                         toggleMenu(true);
                     }
                     break;
@@ -100,6 +99,14 @@ public class FlappyBird extends JPanel implements KeyListener {
     }
 
     private void handleMenuInput(KeyEvent e) {
+        if (gameMenu.isShowingStats()) {
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                gameMenu.toggleStats(false);
+                repaint();
+            }
+            return;
+        }
+
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
                 gameMenu.moveUp();
@@ -122,11 +129,20 @@ public class FlappyBird extends JPanel implements KeyListener {
             case 0: // Continue
                 toggleMenu(false);
                 break;
-            case 1: // Replay
+            case 1: // Statistics
+                gameMenu.toggleStats(true);
+                break;
+            case 2: // Replay
+                if (gameState.isGameStarted()) {
+                    gameState.getScoreManager().updateHighScore();
+                }
                 toggleMenu(false);
                 startGame();
                 break;
-            case 2: // Quit
+            case 3: // Quit
+                if (gameState.isGameStarted()) {
+                    gameState.getScoreManager().updateHighScore();
+                }
                 System.exit(0);
                 break;
         }
