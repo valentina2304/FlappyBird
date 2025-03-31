@@ -54,7 +54,7 @@ Implement a more complex visual feedback system.
 How to Run the Project
 
 Clone the repository:
-git clone https://github.com/user/FlappyBird-Game.git
+git clone https://github.com/valentina2304/FlappyBird.git
 
 Compile and run the game:
 cd FlappyBird-Game
