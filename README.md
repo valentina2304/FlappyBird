@@ -32,6 +32,24 @@ Used for sound effects (jump, collision, scoring). It manages audio playback via
 AudioSystem, Clip, AudioInputStream – for loading and playing sounds
 
 
+Gameplay Enhancements
+
+Introduce power-ups (e.g., temporary shields, time slowdown, etc.).
+
+Implement additional game modes.
+
+Create a practice mode with checkpoints.
+
+Add unlockable bird skins.
+
+UI Improvements
+
+Develop a more modern and customizable UI.
+
+Add animations for menu transitions.
+
+Implement a more complex visual feedback system.
+
 
 How to Run the Project
 
